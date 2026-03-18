@@ -37,4 +37,13 @@ func main() {
 
 	output.PrintSummary(summary)
 
+	if cfg.OutputFile != "" {
+		err := output.WriteToFile(cfg.OutputFile, summary, cfg.OutputJSON)
+
+		if err != nil {
+			fmt.Fprintf(os.Stderr, "Error writing output file: %v\n", err)
+			os.Exit(1)
+		}
+		fmt.Printf("\nResults written to %s\n", cfg.OutputFile)
+	}
 }
